@@ -3,7 +3,7 @@ using UnityEngine;
 public class Buttons : MonoBehaviour
 {
     [SerializeField] GameObject mainMenu;
-    [SerializeField] GameObject Trivia;
+    [SerializeField] GameObject TriviaGame;
     [SerializeField] GameObject Dance;
     [SerializeField] GameObject Singing;
 
@@ -11,15 +11,16 @@ public class Buttons : MonoBehaviour
     void Start()
     {
         mainMenu.SetActive(true);
-        Trivia.SetActive(false);
+        TriviaGame.SetActive(false);
         Dance.SetActive(false);
         Singing.SetActive(false);
     }
 
     public void playTrivia()
     {
+        Trivia.timeLeftInt = 20;
         mainMenu.SetActive(false);
-        Trivia.SetActive(true);
+        TriviaGame.SetActive(true);
     }
 
     public void playDance()

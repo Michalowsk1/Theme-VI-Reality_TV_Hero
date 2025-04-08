@@ -1,46 +1,64 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
-using static TMPro.SpriteAssetUtilities.TexturePacker_JsonArray;
 
 public class Trivia : MonoBehaviour
 {
     [SerializeField] GameObject level;
     [SerializeField] GameObject mainMenu;
     [SerializeField] GameObject questionBox;
-    [SerializeField] GameObject expBar;
+    [SerializeField] GameObject timerText;
     [SerializeField] TextMeshProUGUI Fame;
+    [SerializeField] TextMeshProUGUI timeText;
     [SerializeField] GameObject[] questions;
     string question;
-    float xp;
     int fameLvl;
+
+    public static bool Finished;
+
+    float timeLeftFloat;
+    public static int timeLeftInt;
+
+    public static bool timer;
+
+
     void Start()
     {
+        timerText.SetActive(false);
+        Finished = false;
+        timer = false;
+        timeLeftInt = 20;
         questionBox.SetActive(false);
-        expBar.transform.localScale = new Vector2(expBar.transform.localScale.x, expBar.transform.localScale.y);
         for (int i = 0; i < questions.Length; i++)
         {
             questions[i].SetActive(false);
         }
+
+        timeText.text = "Time Left: 20";
+        
     }
 
     void Update()
     {
         StartCoroutine(cutscene());
         question = TriviaDictionary.questionNum;
-
         QandAs();
         quitButton();
-        Experience();
+        FinalScore();
 
 
-        
+        if (timer)
+        {
+            TimerCountDown();
+        }
     }
 
     IEnumerator cutscene()
     {
         yield return new WaitForSeconds(10);
         questionBox.SetActive(true);
+        timerText.SetActive(true);
+        timer = true;
     }
 
     void quitButton()
@@ -55,32 +73,38 @@ public class Trivia : MonoBehaviour
 
     void QuestionClearer()
     {
-        if (TriviaDictionary.questionAnsweredC || TriviaDictionary.questionAnsweredI)
-        {
+
             for (int i = 0; i < questions.Length; i++)
             {
                 questions[i].SetActive(false);
             }
-            xp = 0.1f;
-            xp = 0.0f;
+
             TriviaDictionary.questionAnsweredC = false;
             TriviaDictionary.questionAnsweredI = false;
+        
+    }
+
+    void FinalScore()
+    {
+        if(timeLeftInt <= 0)
+        {
+            Finished = true;
+            HUD.finalScore = HUD.score / 10;
         }
     }
 
-    void Experience()
+
+    void TimerCountDown()
     {
-        expBar.transform.localScale = new Vector2(expBar.transform.localScale.x + xp, expBar.transform.localScale.y);
-
-
-        //INCREASES LVL
-        if (expBar.transform.localScale.x >= 0.8f)
+        timeLeftFloat += Time.deltaTime;
+        if (timeLeftFloat >= 1)
         {
-            fameLvl++;
-            expBar.transform.localScale = new Vector2(0.01f, expBar.transform.localScale.y);
+            timeLeftInt--;
+            timeLeftFloat = 0;
         }
 
-        Fame.text = "Fame:" + fameLvl;
+        timeText.text = "Time Left:" + timeLeftInt.ToString();
+
     }
     void QandAs()
     {
@@ -89,129 +113,134 @@ public class Trivia : MonoBehaviour
         {
             
             case "What is the capital of England?":
-
+                QuestionClearer();
                 questions[0].SetActive(true);
                 break;
 
             case "Who is going to win this contest?":
 
-                Debug.Log("MEEEEEEEE");
+                QuestionClearer();
+                questions[1].SetActive(true);
                 break;
 
             case "Where is MMU located?":
 
-                Debug.Log("Manchester");
+                QuestionClearer();
+                questions[2].SetActive(true);
                 break;
 
             case "What game console am I inspired by?":
 
-                Debug.Log("Atari");
+                QuestionClearer();
+                questions[3].SetActive(true);
                 break;
 
             case "In what country has a general accidently set off a grenade in his office?":
 
-                Debug.Log("Poland");
+                QuestionClearer();
+                questions[4].SetActive(true);
                 break;
 
             case "What city is known as a concrete jungle?":
 
-                Debug.Log("New York City");
+                QuestionClearer();
+                questions[5].SetActive(true);
                 break;
 
             case "What blockly game has had a movie released about it recently?":
 
-                Debug.Log("A Minecraft Movie");
-                break;
+                QuestionClearer();
+                questions[6].SetActive(true); break;
 
             case "What game has arguably made a foundation for competitive speedrunning":
 
-                Debug.Log("Quake done quick");
-                break;
+                QuestionClearer();
+                questions[7].SetActive(true); break;
 
             case "What game was rocket leagues' prequel?":
 
-                Debug.Log("Supersonic Acrobatic Rocket-Powered Battle-Cars");
-                break;
+                QuestionClearer();
+                questions[8].SetActive(true); break;
 
             case "When was the origianl Doom released?":
 
-                Debug.Log("1995");
-                break;
+                QuestionClearer();
+                questions[9].SetActive(true); break;
 
             case "What is the horror game about spending 5 nights somewhere":
 
-                Debug.Log("Five Nights at Freddys");
-                break;
+                QuestionClearer();
+                questions[10].SetActive(true); break;
 
             case "What is a popular toilet reffered to in brain rot videos":
 
-                Debug.Log("Skibidi Toilet");
-                break;
+                QuestionClearer();
+                questions[11].SetActive(true); break;
 
             case "What popular game company made the souls-like genre":
 
-                Debug.Log("FromSoft");
-                break;
+                QuestionClearer();
+                questions[12].SetActive(true); break;
 
             case "What fast food restaurant is known for their Big Mac?":
 
-                Debug.Log("McDonalds");
-                break;
+                QuestionClearer();
+                questions[13].SetActive(true); break;
 
             case "What was the 4th game a week theme?":
 
-                Debug.Log("PuzzleBox");
-                break;
+                QuestionClearer();
+                questions[14].SetActive(true); break;
 
-            case "When has the Atari came out?":
+            case "When has the original Atari came out?":
 
-                Debug.Log("1995");
-                break;
+                QuestionClearer();
+                questions[15].SetActive(true); break;
 
             case "What was the Call of Duty series inspired by?":
 
-                Debug.Log("1995");
-                break;
+                QuestionClearer();
+                questions[16].SetActive(true); break;
 
             case "What is the smallest country in the world?":
 
-                Debug.Log("1995");
-                break;
+                QuestionClearer();
+                questions[17].SetActive(true); break;
 
             case "What is the name of the official speedrunning website?":
 
-                Debug.Log("1995");
-                break;
+                QuestionClearer();
+                questions[18].SetActive(true); break;
 
             case "Which minecraft server is arguarbly the most popular?":
 
-                Debug.Log("Hypixel");
-                break;
+                QuestionClearer();
+                questions[19].SetActive(true); break;
 
             case "Which main character was played the most in Resident Evil?":
 
-                Debug.Log("Chris Redfield");
-                break;
+                QuestionClearer();
+                questions[20].SetActive(true); break;
 
             case "Who is the Kratos' son in the God of War series?":
 
-                Debug.Log("Atreus");
-                break;
+                QuestionClearer();
+                questions[21].SetActive(true); break;
 
             case "What DC superhero wears a bat costume?":
 
-                Debug.Log("Batman");
-                break;
+                QuestionClearer();
+                questions[22].SetActive(true); break;
 
             case "What was the recent movie that flopped for Disney?":
 
-                Debug.Log("Snow White");
-                break;
+                QuestionClearer();
+                questions[23].SetActive(true); break;
 
             case "What is the hit football game series called?":
 
-                Debug.Log("FIFA");
-                break;
+                QuestionClearer();
+                questions[24].SetActive(true); break;
         }
     }
 }

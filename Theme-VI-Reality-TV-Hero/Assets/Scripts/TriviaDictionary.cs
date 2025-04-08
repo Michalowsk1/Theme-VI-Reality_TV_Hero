@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TriviaDictionary : MonoBehaviour
 {
-    public static Dictionary<int, string> Trivia = new Dictionary<int, string>();
+    public static Dictionary<int, string> TriviaDict = new Dictionary<int, string>();
 
     [SerializeField] TextMeshPro question;
 
@@ -21,42 +21,18 @@ public class TriviaDictionary : MonoBehaviour
         questionAnsweredC = false;
         questionAnsweredI = false;
 
-        Trivia.Add(1, "What is the capital of England?");
-        Trivia.Add(2, "Who is going to win this contest?");
-        Trivia.Add(3, "Where is MMU located?");
-        Trivia.Add(4, "What game console am I inspired by?");
-        Trivia.Add(5, "In what country has a general accidently set off a grenade in his office?");
-        Trivia.Add(6, "What city is known as a concrete jungle?");
-        Trivia.Add(7, "What blockly game has had a movie released about it recently?");
-        Trivia.Add(8, "What game has arguably made a foundation for competitive speedrunning");
-        Trivia.Add(9, "What game was rocket leagues' prequel?");
-        Trivia.Add(10, "When was the origianl Doom released?");
-        Trivia.Add(11, "What is the horror game about spending 5 nights somewhere");
-        Trivia.Add(12, "What is a popular toilet reffered to in brain rot videos");
-        Trivia.Add(13, "What popular game company made the souls-like genre");
-        Trivia.Add(14, "What fast food restaurant is known for their Big Mac?");
-        Trivia.Add(15, "What was the 4th game a week theme?");
-        Trivia.Add(16, "When has the Atari came out?");
-        Trivia.Add(17, "What was the Call of Duty series inspired by?");
-        Trivia.Add(18, "What is the smallest country in the world?");
-        Trivia.Add(19, "What is the name of the official speedrunning website?");
-        Trivia.Add(20, "Which minecraft server is arguarbly the most popular?");
-        Trivia.Add(21, "Which main character was played the most in Resident Evil?");
-        Trivia.Add(22, "Who is the Kratos' son in the God of War series?");
-        Trivia.Add(23, "What DC superhero wears a bat costume?");
-        Trivia.Add(24, "What was the recent movie that flopped for Disney?");
-        Trivia.Add(25, "What is the hit football game series called?");
+        addToDict();
+
     }
 
     // Update is called once per frame
     void Update()
     {
 
-
-        numOfQuestions = Trivia.Count;
+        numOfQuestions = TriviaDict.Count;
         if (Input.GetKeyUp(KeyCode.M))
         {
-            question.text = Trivia[Random.Range(1, numOfQuestions)];
+            question.text = TriviaDict[Random.Range(1, numOfQuestions)];
         }
         questionNum = question.text;
     }
@@ -64,15 +40,45 @@ public class TriviaDictionary : MonoBehaviour
     public void Correct()
     {
         HUD.score += 10;
-        question.text = Trivia[Random.Range(1, numOfQuestions)];
+        question.text = TriviaDict[Random.Range(1, numOfQuestions)];
         questionAnsweredC = true;
+        
     }
 
     public void InCorrect()
     {
         HUD.score -= 5;
-        question.text = Trivia[Random.Range(1, numOfQuestions)];
+        question.text = TriviaDict[Random.Range(1, numOfQuestions)];
         questionAnsweredI = true;
+    }
+
+    public void addToDict()
+    {
+        TriviaDict.Add(1, "What is the capital of England?");
+        TriviaDict.Add(2, "Who is going to win this contest?");
+        TriviaDict.Add(3, "Where is MMU located?");
+        TriviaDict.Add(4, "What game console am I inspired by?");
+        TriviaDict.Add(5, "In what country has a general accidently set off a grenade in his office?");
+        TriviaDict.Add(6, "What city is known as a concrete jungle?");
+        TriviaDict.Add(7, "What blockly game has had a movie released about it recently?");
+        TriviaDict.Add(8, "What game has arguably made a foundation for competitive speedrunning");
+        TriviaDict.Add(9, "What game was rocket leagues' prequel?");
+        TriviaDict.Add(10, "When was the origianl Doom released?");
+        TriviaDict.Add(11, "What is the horror game about spending 5 nights somewhere");
+        TriviaDict.Add(12, "What is a popular toilet reffered to in brain rot videos");
+        TriviaDict.Add(13, "What popular game company made the souls-like genre");
+        TriviaDict.Add(14, "What fast food restaurant is known for their Big Mac?");
+        TriviaDict.Add(15, "What was the 4th game a week theme?");
+        TriviaDict.Add(16, "When has the original Atari came out?");
+        TriviaDict.Add(17, "What was the Call of Duty series inspired by?");
+        TriviaDict.Add(18, "What is the smallest country in the world?");
+        TriviaDict.Add(19, "What is the name of the official speedrunning website?");
+        TriviaDict.Add(20, "Which minecraft server is arguarbly the most popular?");
+        TriviaDict.Add(21, "Which main character was played the most in Resident Evil?");
+        TriviaDict.Add(22, "Who is the Kratos' son in the God of War series?");
+        TriviaDict.Add(23, "What DC superhero wears a bat costume?");
+        TriviaDict.Add(24, "What was the recent movie that flopped for Disney?");
+        TriviaDict.Add(25, "What is the hit football game series called?");
     }
 }
 
