@@ -7,6 +7,7 @@ public class Trivia : MonoBehaviour
     [SerializeField] GameObject level;
     [SerializeField] GameObject mainMenu;
     [SerializeField] GameObject questionBox;
+    [SerializeField] GameObject answerBox;
     [SerializeField] GameObject timerText;
     [SerializeField] TextMeshProUGUI Fame;
     [SerializeField] TextMeshProUGUI timeText;
@@ -25,6 +26,7 @@ public class Trivia : MonoBehaviour
     void Start()
     {
         timerText.SetActive(false);
+        answerBox.SetActive(false);
         Finished = false;
         timer = false;
         timeLeftInt = 20;
@@ -41,7 +43,7 @@ public class Trivia : MonoBehaviour
     void Update()
     {
         StartCoroutine(cutscene());
-        question = TriviaDictionary.questionNum;
+        question = gameManager.questionNum;
         QandAs();
         quitButton();
         FinalScore();
@@ -58,6 +60,7 @@ public class Trivia : MonoBehaviour
         yield return new WaitForSeconds(10);
         questionBox.SetActive(true);
         timerText.SetActive(true);
+        answerBox.SetActive(true);
         timer = true;
     }
 
@@ -74,13 +77,13 @@ public class Trivia : MonoBehaviour
     void QuestionClearer()
     {
 
-            for (int i = 0; i < questions.Length; i++)
-            {
-                questions[i].SetActive(false);
-            }
+        for (int i = 0; i < questions.Length; i++)
+        {
+            questions[i].SetActive(false);
+        }
 
-            TriviaDictionary.questionAnsweredC = false;
-            TriviaDictionary.questionAnsweredI = false;
+        TriviaDictionary.questionAnsweredC = false;
+        TriviaDictionary.questionAnsweredI = false;
         
     }
 

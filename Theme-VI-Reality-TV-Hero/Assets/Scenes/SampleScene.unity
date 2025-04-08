@@ -155,7 +155,7 @@ RectTransform:
   m_Father: {fileID: 1751414950}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -2205,7 +2205,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &765150758
 Transform:
   m_ObjectHideFlags: 0
@@ -2655,7 +2655,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &941841392
 Transform:
   m_ObjectHideFlags: 0
@@ -2702,6 +2702,7 @@ MonoBehaviour:
   level: {fileID: 941841391}
   mainMenu: {fileID: 765150757}
   questionBox: {fileID: 1609471340}
+  answerBox: {fileID: 1377716830}
   timerText: {fileID: 1492058375}
   Fame: {fileID: 1556328249}
   timeText: {fileID: 1492058377}
@@ -5275,7 +5276,7 @@ RectTransform:
   m_Father: {fileID: 2131215597}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 1.199997, y: -0.5}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -6806,6 +6807,8 @@ MonoBehaviour:
   Singing: {fileID: 858358571}
   questionBox: {fileID: 1609471340}
   timerText: {fileID: 1492058375}
+  question: {fileID: 1469889338}
+  answerBox: {fileID: 1377716830}
 --- !u!114 &1895119537
 MonoBehaviour:
   m_ObjectHideFlags: 0
