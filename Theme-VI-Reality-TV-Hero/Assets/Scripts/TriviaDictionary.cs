@@ -1,6 +1,4 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using TMPro;
 using UnityEngine;
 
@@ -13,10 +11,15 @@ public class TriviaDictionary : MonoBehaviour
     public static string questionNum;
 
     public static int numOfQuestions;
+
+    public static bool questionAnsweredC;
+    public static bool questionAnsweredI;
     // Start is called before the first frame update
     void Start()
     {
         question.text = "";
+        questionAnsweredC = false;
+        questionAnsweredI = false;
 
         Trivia.Add(1, "What is the capital of England?");
         Trivia.Add(2, "Who is going to win this contest?");
@@ -48,12 +51,28 @@ public class TriviaDictionary : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        numOfQuestions = Trivia.Count ;
+
+
+        numOfQuestions = Trivia.Count;
         if (Input.GetKeyUp(KeyCode.M))
         {
             question.text = Trivia[Random.Range(1, numOfQuestions)];
         }
         questionNum = question.text;
+    }
+
+    public void Correct()
+    {
+        HUD.score += 10;
+        question.text = Trivia[Random.Range(1, numOfQuestions)];
+        questionAnsweredC = true;
+    }
+
+    public void InCorrect()
+    {
+        HUD.score -= 5;
+        question.text = Trivia[Random.Range(1, numOfQuestions)];
+        questionAnsweredI = true;
     }
 }
 

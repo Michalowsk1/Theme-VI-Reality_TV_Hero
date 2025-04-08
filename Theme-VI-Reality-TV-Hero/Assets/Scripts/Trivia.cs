@@ -1,17 +1,27 @@
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using static TMPro.SpriteAssetUtilities.TexturePacker_JsonArray;
 
 public class Trivia : MonoBehaviour
 {
     [SerializeField] GameObject level;
     [SerializeField] GameObject mainMenu;
     [SerializeField] GameObject questionBox;
+    [SerializeField] GameObject expBar;
+    [SerializeField] TextMeshProUGUI Fame;
+    [SerializeField] GameObject[] questions;
     string question;
+    float xp;
+    int fameLvl;
     void Start()
     {
         questionBox.SetActive(false);
+        expBar.transform.localScale = new Vector2(expBar.transform.localScale.x, expBar.transform.localScale.y);
+        for (int i = 0; i < questions.Length; i++)
+        {
+            questions[i].SetActive(false);
+        }
     }
 
     void Update()
@@ -21,7 +31,10 @@ public class Trivia : MonoBehaviour
 
         QandAs();
         quitButton();
+        Experience();
 
+
+        
     }
 
     IEnumerator cutscene()
@@ -40,13 +53,44 @@ public class Trivia : MonoBehaviour
         }
     }
 
+    void QuestionClearer()
+    {
+        if (TriviaDictionary.questionAnsweredC || TriviaDictionary.questionAnsweredI)
+        {
+            for (int i = 0; i < questions.Length; i++)
+            {
+                questions[i].SetActive(false);
+            }
+            xp = 0.1f;
+            xp = 0.0f;
+            TriviaDictionary.questionAnsweredC = false;
+            TriviaDictionary.questionAnsweredI = false;
+        }
+    }
+
+    void Experience()
+    {
+        expBar.transform.localScale = new Vector2(expBar.transform.localScale.x + xp, expBar.transform.localScale.y);
+
+
+        //INCREASES LVL
+        if (expBar.transform.localScale.x >= 0.8f)
+        {
+            fameLvl++;
+            expBar.transform.localScale = new Vector2(0.01f, expBar.transform.localScale.y);
+        }
+
+        Fame.text = "Fame:" + fameLvl;
+    }
     void QandAs()
     {
+        QuestionClearer();
         switch (question)
         {
+            
             case "What is the capital of England?":
 
-                Debug.Log("London");
+                questions[0].SetActive(true);
                 break;
 
             case "Who is going to win this contest?":
