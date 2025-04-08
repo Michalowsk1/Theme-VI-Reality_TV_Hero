@@ -2,14 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Buttons : MonoBehaviour
+public class gameManager : MonoBehaviour
 {
     [SerializeField] GameObject mainMenu;
     [SerializeField] GameObject Trivia;
     [SerializeField] GameObject Dance;
     [SerializeField] GameObject Singing;
-
-
     void Start()
     {
         mainMenu.SetActive(true);
@@ -18,22 +16,9 @@ public class Buttons : MonoBehaviour
         Singing.SetActive(false);
     }
 
-    public void playTrivia()
+    // Update is called once per frame
+    void Update()
     {
-        mainMenu.SetActive(false);
-        Trivia.SetActive(true);
+        
     }
-
-    public void playDance()
-    {
-        mainMenu.SetActive(false);
-        Dance.SetActive(true);
-    }
-
-    public void playSing()
-    {
-        mainMenu.SetActive(false);
-        Singing.SetActive(true);
-    }
-
 }
