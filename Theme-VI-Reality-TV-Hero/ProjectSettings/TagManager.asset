@@ -9,6 +9,7 @@ TagManager:
   - Green
   - Destroy
   - Zero
+  - ZeroNish
   layers:
   - Default
   - TransparentFX
