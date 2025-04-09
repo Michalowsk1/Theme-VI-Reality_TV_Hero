@@ -21,6 +21,8 @@ public class gameManager : MonoBehaviour
     [SerializeField] GameObject answerBox;
     public static string questionNum;
 
+    public static int keyVal;
+    public static int leftOverVal;
     public static int numOfQuestions;
     void Start()
     {
@@ -30,6 +32,7 @@ public class gameManager : MonoBehaviour
         Dance.SetActive(false);
         Singing.SetActive(false);
         question.text = "";
+        leftOverVal = 0;
 
 
         TriviaDict.Add(1, "What is the capital of England?");
@@ -57,6 +60,9 @@ public class gameManager : MonoBehaviour
         TriviaDict.Add(23, "What DC superhero wears a bat costume?");
         TriviaDict.Add(24, "What was the recent movie that flopped for Disney?");
         TriviaDict.Add(25, "What is the hit football game series called?");
+
+        numOfQuestions = TriviaDict.Count;
+        keyVal = Random.Range(0, numOfQuestions);
     }
 
     // Update is called once per frame
@@ -72,12 +78,14 @@ public class gameManager : MonoBehaviour
             Trivia.timer = false;
         }
 
-
-        numOfQuestions = TriviaDict.Count;
-        if (Input.GetKeyUp(KeyCode.M))
+        if (keyVal > 25)
         {
-            question.text = TriviaDict[Random.Range(1, numOfQuestions)];
+            leftOverVal = keyVal - 25;
+            keyVal = 0 + leftOverVal;
         }
-        questionNum = question.text;
+
+        question.text = TriviaDict[keyVal]; //sets question from keyval
+
+        questionNum = question.text; //writes question
     }
 }

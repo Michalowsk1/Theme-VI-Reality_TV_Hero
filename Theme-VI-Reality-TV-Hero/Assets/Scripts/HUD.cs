@@ -45,7 +45,6 @@ public class HUD : MonoBehaviour
 
         maxXpInc();
 
-        Debug.Log("Score: " + score + "       FinalScore: " + finalScore + "   Sliderval: " + slider.value);
     }
 
 
@@ -67,10 +66,14 @@ public class HUD : MonoBehaviour
             slider.value += 1f;
         }
 
+        if(scoreDisplay < -100)
+        {
+            scoreDisplay = -100;
+        }
+
         scoreDisplay = score;
         Score.text = "Score:" + scoreDisplay;
         finalScore = 0;
-        //score = 0;
         Trivia.Finished = false;
     }
 
