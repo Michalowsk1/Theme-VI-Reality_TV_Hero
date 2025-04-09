@@ -15,6 +15,9 @@ public class LeftArrowScript : MonoBehaviour
     bool green;
     bool wrong;
 
+    bool touching;
+
+
     void Start()
     {
         arrowrb = GetComponent<Rigidbody2D>();
@@ -24,117 +27,86 @@ public class LeftArrowScript : MonoBehaviour
         wrong = false;
 
         overallScore = 0;
+
+        touching = false;
     }
 
     void Update()
     {
 
         ScoreAdder();
-        FallSpeed();
+        arrowrb.gravityScale = Dance.gravScale;
     }
+
+
 
     void ScoreAdder()
     {
         if (red)
         {
-            if (Input.GetKeyDown(KeyCode.UpArrow))
+            if (Input.GetKeyDown(KeyCode.LeftArrow) && touching)
             {
                 Dance.score += arrowScore;
                 arrowScore = 0;
                 Destroy(this.arrow);
                 red = false;
+                touching=false;
             }
         }
 
         if (yellow)
         {
-            if (Input.GetKeyDown(KeyCode.UpArrow))
+            if (Input.GetKeyDown(KeyCode.LeftArrow) && touching)
             {
                 Dance.score += arrowScore;
                 arrowScore = 0;
                 Destroy(this.arrow);
                 yellow = false;
+                touching = false;
             }
         }
 
         if (green)
         {
-            if (Input.GetKeyDown(KeyCode.UpArrow))
+            if (Input.GetKeyDown(KeyCode.LeftArrow) && touching)
             {
                 Dance.score += arrowScore;
                 arrowScore = 0;
                 Destroy(this.arrow);
                 green = false;
-            }
-        }
-
-        if (wrong)
-        {
-            if (Input.GetKeyDown(KeyCode.UpArrow))
-            {
-                Dance.score += 0;
-                arrowScore = 0;
-                Destroy(this.arrow);
-                wrong = false;
+                touching = false;
             }
         }
     }
 
-    void FallSpeed()
-    {
-        if (Dance.stage == 1)
-        {
-            arrowrb.gravityScale = 0.075f;
-        }
-
-        if (Dance.stage == 2)
-        {
-            arrowrb.gravityScale = 0.1f;
-        }
-
-        if (Dance.stage == 3)
-        {
-            arrowrb.gravityScale = 0.125f;
-        }
-
-        if (Dance.stage == 4)
-        {
-            arrowrb.gravityScale = 0.15f;
-        }
-    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
             if (collision.gameObject.tag == "Red")
             {
-                Debug.Log("Inside");
-                arrowScore = 1;
+                touching = true;
+                arrowScore = 10;
                 red = true;
             }
 
             else if (collision.gameObject.tag == "Yellow")
             {
-                arrowScore = 2;
-                yellow = true;
+                 touching = true;
+                 arrowScore = 20;
+                 yellow = true;
             }
 
             else if (collision.gameObject.tag == "Green")
             {
-                arrowScore = 3;
+                touching = true;
+                arrowScore = 30;
                 green = true;
-            }
-
-            else if (collision.gameObject.tag == "Zero")
-            {
-                arrowScore = 0;
-                wrong = true;
             }
 
             else if (collision.gameObject.tag == "Destroy")
             {
-                Destroy(this.arrow);
+                Dance.score -= 30;
+                Destroy(arrow);
             }
-
-
     }
 }

@@ -23,6 +23,8 @@ public class HUD : MonoBehaviour
     public static int scoreDisplay;
 
     public static int finalScore;
+
+    public static int finalDanceScore;
     DateTime curretTime;
     // Start is called before the first frame update
     void Start()
@@ -68,7 +70,12 @@ public class HUD : MonoBehaviour
             slider.value += 1f;
         }
 
-        if(scoreDisplay < -100)
+        for (int i = 0; i < finalDanceScore; i++)
+        {
+            slider.value += 0.1f;
+        }
+
+        if (scoreDisplay < -100)
         {
             scoreDisplay = -100;
         }

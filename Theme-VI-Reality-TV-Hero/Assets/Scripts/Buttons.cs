@@ -4,16 +4,16 @@ public class Buttons : MonoBehaviour
 {
     [SerializeField] GameObject mainMenu;
     [SerializeField] GameObject TriviaGame;
-    [SerializeField] GameObject Dance;
-    [SerializeField] GameObject Singing;
+    [SerializeField] GameObject DanceGame;
+    [SerializeField] GameObject SingingGame;
 
 
     void Start()
     {
         mainMenu.SetActive(true);
         TriviaGame.SetActive(false);
-        Dance.SetActive(false);
-        Singing.SetActive(false);
+        DanceGame.SetActive(false);
+        SingingGame.SetActive(false);
     }
 
     public void playTrivia()
@@ -25,14 +25,15 @@ public class Buttons : MonoBehaviour
 
     public void playDance()
     {
+        Dance.timeLeftInt = 20;
         mainMenu.SetActive(false);
-        Dance.SetActive(true);
+        DanceGame.SetActive(true);
     }
 
     public void playSing()
     {
         mainMenu.SetActive(false);
-        Singing.SetActive(true);
+        SingingGame.SetActive(true);
     }
 
 }

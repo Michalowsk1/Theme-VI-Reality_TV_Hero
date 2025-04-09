@@ -11,8 +11,8 @@ public class gameManager : MonoBehaviour
 
     [SerializeField] GameObject mainMenu;
     [SerializeField] GameObject TriviaGame;
-    [SerializeField] GameObject Dance;
-    [SerializeField] GameObject Singing;
+    [SerializeField] GameObject DanceGame;
+    [SerializeField] GameObject SingingGame;
 
 
     [SerializeField] GameObject questionBox;
@@ -33,8 +33,8 @@ public class gameManager : MonoBehaviour
         answerBox.SetActive(false);
         mainMenu.SetActive(true);
         TriviaGame.SetActive(false);
-        Dance.SetActive(false);
-        Singing.SetActive(false);
+        DanceGame.SetActive(false);
+        SingingGame.SetActive(false);
         question.text = "";
         leftOverVal = 1;
 
