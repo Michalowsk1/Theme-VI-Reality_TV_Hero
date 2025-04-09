@@ -16,6 +16,8 @@ public class HUD : MonoBehaviour
 
     int fameLvl;
 
+    float leftOverScore;
+
     public static int score;
 
     public static int scoreDisplay;
@@ -70,6 +72,7 @@ public class HUD : MonoBehaviour
         {
             scoreDisplay = -100;
         }
+
 
         scoreDisplay = score;
         Score.text = "Score:" + scoreDisplay;
