@@ -80,11 +80,7 @@ public class Trivia : MonoBehaviour
         for (int i = 0; i < questions.Length; i++)
         {
             questions[i].SetActive(false);
-        }
-
-        TriviaDictionary.questionAnsweredC = false;
-        TriviaDictionary.questionAnsweredI = false;
-        
+        }     
     }
 
     void FinalScore()

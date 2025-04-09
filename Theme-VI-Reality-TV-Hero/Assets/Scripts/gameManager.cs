@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -19,6 +20,9 @@ public class gameManager : MonoBehaviour
 
     [SerializeField] TextMeshPro question;
     [SerializeField] GameObject answerBox;
+
+    [SerializeField] GameObject right;
+    [SerializeField] GameObject wrong;
     public static string questionNum;
 
     public static int keyVal;
@@ -32,7 +36,10 @@ public class gameManager : MonoBehaviour
         Dance.SetActive(false);
         Singing.SetActive(false);
         question.text = "";
-        leftOverVal = 0;
+        leftOverVal = 1;
+
+        right.SetActive(false);
+        wrong.SetActive(false);
 
 
         TriviaDict.Add(1, "What is the capital of England?");
@@ -78,7 +85,18 @@ public class gameManager : MonoBehaviour
             Trivia.timer = false;
         }
 
-        if (keyVal > 25)
+        if(TriviaDictionary.questionAnsweredC)
+        {
+            StartCoroutine(Right());
+        }
+
+        if (TriviaDictionary.questionAnsweredI)
+        {
+            StartCoroutine(Wrong());
+        }
+
+
+            if (keyVal > 25)
         {
             leftOverVal = keyVal - 25;
             keyVal = 0 + leftOverVal;
@@ -87,5 +105,23 @@ public class gameManager : MonoBehaviour
         question.text = TriviaDict[keyVal]; //sets question from keyval
 
         questionNum = question.text; //writes question
+    }
+
+    IEnumerator Right()
+    {
+        right.SetActive(true);
+        yield return new WaitForSeconds(1);
+        right.SetActive(false);
+        yield return null;
+        TriviaDictionary.questionAnsweredC = false;
+    }
+
+    IEnumerator Wrong()
+    {
+        wrong.SetActive(true);
+        yield return new WaitForSeconds(1);
+        wrong.SetActive(false);
+        yield return null;
+        TriviaDictionary.questionAnsweredI = false;
     }
 }

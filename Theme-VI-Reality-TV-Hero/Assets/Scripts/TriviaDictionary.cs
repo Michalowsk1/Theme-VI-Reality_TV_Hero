@@ -1,4 +1,5 @@
 
+using System.Collections;
 using TMPro;
 using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
@@ -32,7 +33,7 @@ public class TriviaDictionary : MonoBehaviour
     public void Correct()
     {
         HUD.score += 10;
-       gameManager.keyVal += Random.Range(1, 7);
+        gameManager.keyVal += Random.Range(1, 7);
         questionAnsweredC = true;
         
     }
