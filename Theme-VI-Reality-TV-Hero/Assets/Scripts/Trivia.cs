@@ -45,7 +45,6 @@ public class Trivia : MonoBehaviour
         StartCoroutine(cutscene());
         question = gameManager.questionNum;
         QandAs();
-        quitButton();
         FinalScore();
 
 
@@ -62,16 +61,6 @@ public class Trivia : MonoBehaviour
         timerText.SetActive(true);
         answerBox.SetActive(true);
         timer = true;
-    }
-
-    void quitButton()
-    {
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            mainMenu.SetActive(true);
-            level.SetActive(false);
-
-        }
     }
 
     void QuestionClearer()
