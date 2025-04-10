@@ -16,8 +16,6 @@ public class HUD : MonoBehaviour
 
     int fameLvl;
 
-    float leftOverScore;
-
     public static int score;
 
     public static int scoreDisplay;
@@ -25,6 +23,7 @@ public class HUD : MonoBehaviour
     public static int finalScore;
 
     public static int finalDanceScore;
+
     DateTime curretTime;
     // Start is called before the first frame update
     void Start()
@@ -35,6 +34,7 @@ public class HUD : MonoBehaviour
         fameLvl = 1;
 
         scoreDisplay = 0;
+
     }
 
     // Update is called once per frame
@@ -42,7 +42,7 @@ public class HUD : MonoBehaviour
     {
         Clock();
 
-        if (Trivia.Finished)
+        if (Trivia.Finished|| Dance.finished)
         {
             xpUpdate();
         }
@@ -72,7 +72,7 @@ public class HUD : MonoBehaviour
 
         for (int i = 0; i < finalDanceScore; i++)
         {
-            slider.value += 0.1f;
+            slider.value += 0.05f;
         }
 
         if (scoreDisplay < -100)
@@ -81,21 +81,30 @@ public class HUD : MonoBehaviour
         }
 
 
-        scoreDisplay = score;
+        scoreDisplay += score;
+        scoreDisplay += Dance.score;
         Score.text = "Score:" + scoreDisplay;
         finalScore = 0;
+        score = 0;
+        finalDanceScore = 0;
         Trivia.Finished = false;
+        Dance.finished = false;
+        Dance.score = 0;
+        
     }
 
     void maxXpInc()
     {
+
         if (slider.value >= slider.maxValue)
         {
+            
             fameLvl++;
-            slider.value = 0.0f;
             Fame.text = "Fame:" + fameLvl;
+            slider.maxValue = 10 + (fameLvl * 5);
+            slider.value = 0.0f;
+
         }
 
-        slider.maxValue = 10 + (fameLvl * 5);
     }
 }

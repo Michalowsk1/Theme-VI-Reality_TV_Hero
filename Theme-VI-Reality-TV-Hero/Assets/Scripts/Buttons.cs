@@ -25,7 +25,7 @@ public class Buttons : MonoBehaviour
 
     public void playDance()
     {
-        Dance.timeLeftInt = 20;
+        Dance.timeLeftInt = 30;
         mainMenu.SetActive(false);
         DanceGame.SetActive(true);
     }

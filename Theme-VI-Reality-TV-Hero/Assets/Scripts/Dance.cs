@@ -41,6 +41,8 @@ public class Dance : MonoBehaviour
 
     public static bool game;
 
+    public static bool finished;
+
 
 
     void Start()
@@ -53,7 +55,11 @@ public class Dance : MonoBehaviour
 
         game = false;
 
+        finished = false;
+
         scoreText.text = "";
+
+        timeLeftInt = 30;
     }
 
     // Update is called once per frame
@@ -61,13 +67,12 @@ public class Dance : MonoBehaviour
     {
         StartCoroutine(Cutscene());
 
-            Debug.Log("gameActive");
             scoreText.text = "Score: " + score / 10;
             stageSwitcher();
 
             TimerCountDown();
 
-            randInt = Random.Range(0, 3);
+            randInt = Random.Range(0, 4);
             timeLeftFloat += Time.deltaTime;
 
             timer = timer + Time.deltaTime;
@@ -89,21 +94,21 @@ public class Dance : MonoBehaviour
             maxTime = 1.0f;
             gravScale = .8f;
         }
-        if (score >= 10)
+        if (score >= 100)
         {
             stage = 2;
             maxTime = 0.85f;
             gravScale = .9f;
         }
 
-        if (score >= 25)
+        if (score >= 250)
         {
             stage = 3;
             maxTime = 0.6f;
             gravScale = 1f;
         }
 
-        if (score >= 50)
+        if (score >= 500)
         {
             stage = 4;
             maxTime = 0.45f;
@@ -137,6 +142,7 @@ public class Dance : MonoBehaviour
         if(timeLeftInt <= 0)
         {
             game = false;
+            finished = true;
             timeline.SetActive(true);
             ScreenTime.SetActive(false);
             scoreText.text = "";
@@ -145,7 +151,7 @@ public class Dance : MonoBehaviour
 
             finalScore = score / 10;
 
-            HUD.score += finalScore;
+            HUD.finalDanceScore = score;
             finalScore = 0;
             
         }
