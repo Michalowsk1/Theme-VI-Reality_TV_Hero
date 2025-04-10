@@ -18,9 +18,15 @@ public class Singing : MonoBehaviour
 
     int randInt;
 
+    int randPosInt;
+
     int stage;
 
     float noteSpawnY;
+
+    int noteSize;
+
+    float spawnTime;
 
     public float noteSpawnTime;
     // Start is called before the first frame update
@@ -37,6 +43,7 @@ public class Singing : MonoBehaviour
         PitchMove();
         NoteSpawn();
         randInt = Random.Range(0, 3);
+        randPosInt = Random.Range(0, 2);
     }
 
     void PitchMove()
@@ -54,17 +61,39 @@ public class Singing : MonoBehaviour
         stage = 1;
         if (stage == 1)
         {
+            noteSize = 0;
             movespeed = 2f;
+            spawnTime = 0.25f;
         }
     }
 
     void NoteSpawn()
     {
         noteSpawnTime += Time.deltaTime;
-        if (noteSpawnTime >= 0.25)
+        if (noteSpawnTime >= spawnTime)
         {
-            Instantiate(Notes[randInt], new Vector2(7, noteSpawnY), Quaternion.identity);
+            Instantiate(Notes[noteSize], new Vector2(7, noteSpawnY), Quaternion.identity);
             noteSpawnTime = 0;
+
+            if(randPosInt == 0)
+            {
+                noteSpawnY -= 0.5f;
+            }
+
+            if(noteSpawnY >= 3)
+            {
+                noteSpawnY -= 2f;
+            }
+
+            if(randPosInt == 1)
+            {
+                noteSpawnY += 0.5f;
+            }
+
+            if (noteSpawnY <= -3)
+            {
+                noteSpawnY += 2f;
+            }
         }
     }
 }
