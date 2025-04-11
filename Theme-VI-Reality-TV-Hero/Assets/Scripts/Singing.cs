@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Net;
+using TMPro;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,7 +11,16 @@ public class Singing : MonoBehaviour
 {
     [SerializeField] GameObject pitchLevel;
 
+    [SerializeField] GameObject mainMenu;
+
+    [SerializeField] GameObject singingLevel;
+
     [SerializeField] GameObject[] Notes;
+
+    [SerializeField] TextMeshProUGUI scoreText;
+
+
+    [SerializeField] TextMeshProUGUI timeText;
 
     public Transform PitchSpawn;
 
@@ -28,22 +38,49 @@ public class Singing : MonoBehaviour
 
     float spawnTime;
 
+    public static int timeLeftInt;
+    float timeLeftFloat;
+
     public float noteSpawnTime;
+
+    public static bool finished;
+
+    public static int finalScore;
+
+    bool game;
     // Start is called before the first frame update
     void Start()
     {
         noteSpawnY = 0;
         pitchLevel.transform.position = PitchSpawn.position;
+        scoreText.text = "";
+        timeText.text = "";
+        timeLeftInt = 60;
+        stage = 1;
+        finished = false;
+        game = false;
     }
 
     // Update is called once per frame
     void Update()
     {
         stageChanger();
-        PitchMove();
-        NoteSpawn();
+        lvlChanger();
+
+        if(Input.GetKey(KeyCode.P))
+        {
+            game = true;
+        }
+        if (game)
+        {
+            PitchMove();
+            NoteSpawn();
+            TimerCountDown();
+            gameOver();
+        }
         randInt = Random.Range(0, 3);
         randPosInt = Random.Range(0, 2);
+
     }
 
     void PitchMove()
@@ -58,12 +95,87 @@ public class Singing : MonoBehaviour
 
     void stageChanger()
     {
-        stage = 1;
         if (stage == 1)
         {
             noteSize = 0;
             movespeed = 2f;
             spawnTime = 0.25f;
+        }
+
+        if(stage == 2)
+        {
+            noteSize = 0;
+            movespeed = 4f;
+            spawnTime = 0.125f;
+        }
+
+        if(stage == 3)
+        {
+            noteSize = 1;
+            movespeed = 6f;
+            spawnTime = 0.095f;
+        }
+
+        if(stage == 4)
+        {
+            noteSize = 2;
+            movespeed = 8f;
+            spawnTime = 0.0625f;
+        }
+    }
+
+    void lvlChanger()
+    {
+        if(NotesBehavior.score < 750)
+        {
+            stage = 1;
+        }
+
+        if (NotesBehavior.score >= 750)
+        {
+            stage = 2;
+        }
+
+        if (NotesBehavior.score >= 1500)
+        {
+            stage = 3;
+        }
+
+        if (NotesBehavior.score >= 2500)
+        {
+            stage = 4;
+        }
+
+
+    }
+
+    void TimerCountDown()
+    {
+        timeLeftFloat += Time.deltaTime;
+        if (timeLeftFloat >= 1)
+        {
+            timeLeftInt--;
+            timeLeftFloat = 0;
+        }
+
+        timeText.text = "Time Left:" + timeLeftInt.ToString();
+
+        scoreText.text = "Score: " + NotesBehavior.score;
+
+    }
+
+    void gameOver()
+    {
+        if (timeLeftInt <= 0)
+        {
+            game = false;
+            finished = true;
+            singingLevel.SetActive(false);
+            mainMenu.SetActive(true);
+
+            finalScore = NotesBehavior.score / 10;
+
+            HUD.finalSingingScore = finalScore;
         }
     }
 

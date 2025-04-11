@@ -32,6 +32,7 @@ public class Buttons : MonoBehaviour
 
     public void playSing()
     {
+        Singing.timeLeftInt = 60;
         mainMenu.SetActive(false);
         SingingGame.SetActive(true);
     }

@@ -24,6 +24,8 @@ public class HUD : MonoBehaviour
 
     public static int finalDanceScore;
 
+    public static int finalSingingScore;
+
     DateTime curretTime;
     // Start is called before the first frame update
     void Start()
@@ -42,7 +44,7 @@ public class HUD : MonoBehaviour
     {
         Clock();
 
-        if (Trivia.Finished|| Dance.finished)
+        if (Trivia.Finished|| Dance.finished || Singing.finished)
         {
             xpUpdate();
         }
@@ -75,6 +77,11 @@ public class HUD : MonoBehaviour
             slider.value += 0.05f;
         }
 
+        for (int i = 0; i < finalSingingScore; i++)
+        {
+            slider.value += 0.01f;
+        }
+
         if (scoreDisplay < -100)
         {
             scoreDisplay = -100;
@@ -87,8 +94,10 @@ public class HUD : MonoBehaviour
         finalScore = 0;
         score = 0;
         finalDanceScore = 0;
+        finalSingingScore = 0;
         Trivia.Finished = false;
         Dance.finished = false;
+        Singing.finished = false;
         Dance.score = 0;
         
     }
