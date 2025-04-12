@@ -25,6 +25,7 @@ public class Singing : MonoBehaviour
     [SerializeField] TextMeshProUGUI timeText;
 
     public Transform PitchSpawn;
+    [SerializeField] Collider2D destroyBar;
 
     public static float movespeed;
 
@@ -64,6 +65,8 @@ public class Singing : MonoBehaviour
         stage = 1;
         finished = false;
         game = false;
+
+        destroyBar.enabled = true;
     }
 
     // Update is called once per frame
@@ -185,11 +188,15 @@ public class Singing : MonoBehaviour
             finished = true;
             singingLevel.SetActive(false);
             mainMenu.SetActive(true);
+            
 
             finalScore = NotesBehavior.score / 10;
 
             HUD.finalSingingScore = finalScore;
             HUD.scoreDisplay += finalScore;
+
+            NotesBehavior.score = 0;
+            destroyBar.enabled = false;
         }
     }
 
@@ -198,7 +205,7 @@ public class Singing : MonoBehaviour
         noteSpawnTime += Time.deltaTime;
         if (noteSpawnTime >= spawnTime)
         {
-            Instantiate(Notes[noteSize], new Vector2(7, noteSpawnY), Quaternion.identity);
+            Instantiate(Notes[noteSize], new Vector3(7, noteSpawnY, 0), Quaternion.identity);
             noteSpawnTime = 0;
 
             if(randPosInt == 0)
@@ -228,5 +235,6 @@ public class Singing : MonoBehaviour
         yield return new WaitForSeconds(10);
         UI.SetActive(true);
         game = true;
+        destroyBar.enabled = true;
     }
 }

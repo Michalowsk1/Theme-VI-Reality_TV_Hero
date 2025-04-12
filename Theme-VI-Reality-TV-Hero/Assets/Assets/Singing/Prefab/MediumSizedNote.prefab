@@ -171,4 +171,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a00feeca75c5cfc41842e039df324c20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Note: {fileID: 1192886734874637503}
   note: {fileID: 202660348565969231}

@@ -6,6 +6,7 @@ public class Buttons : MonoBehaviour
     [SerializeField] GameObject TriviaGame;
     [SerializeField] GameObject DanceGame;
     [SerializeField] GameObject SingingGame;
+    [SerializeField] GameObject FinalGame;
 
 
     void Start()
@@ -14,6 +15,7 @@ public class Buttons : MonoBehaviour
         TriviaGame.SetActive(false);
         DanceGame.SetActive(false);
         SingingGame.SetActive(false);
+        FinalGame.SetActive(false);
     }
 
     public void playTrivia()
@@ -35,6 +37,12 @@ public class Buttons : MonoBehaviour
         Singing.timeLeftInt = 60;
         mainMenu.SetActive(false);
         SingingGame.SetActive(true);
+    }
+
+    public void playFinalLvl()
+    {
+        mainMenu.SetActive(false);
+        FinalGame.SetActive(true);
     }
 
 }

@@ -13,6 +13,7 @@ public class gameManager : MonoBehaviour
     [SerializeField] GameObject TriviaGame;
     [SerializeField] GameObject DanceGame;
     [SerializeField] GameObject SingingGame;
+    [SerializeField] GameObject FinalGame;
 
 
     [SerializeField] GameObject questionBox;
@@ -38,6 +39,7 @@ public class gameManager : MonoBehaviour
         TriviaGame.SetActive(false);
         DanceGame.SetActive(false);
         SingingGame.SetActive(false);
+        FinalGame.SetActive(false);
         question.text = "";
         leftOverVal = 1;
 
