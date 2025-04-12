@@ -30,6 +30,9 @@ public class gameManager : MonoBehaviour
     public static int numOfQuestions;
     void Start()
     {
+        Application.targetFrameRate = 60;
+
+
         answerBox.SetActive(false);
         mainMenu.SetActive(true);
         TriviaGame.SetActive(false);

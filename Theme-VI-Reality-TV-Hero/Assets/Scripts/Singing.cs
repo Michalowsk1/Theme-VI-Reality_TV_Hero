@@ -15,6 +15,8 @@ public class Singing : MonoBehaviour
 
     [SerializeField] GameObject singingLevel;
 
+    [SerializeField] GameObject UI;
+
     [SerializeField] GameObject[] Notes;
 
     [SerializeField] TextMeshProUGUI scoreText;
@@ -29,6 +31,8 @@ public class Singing : MonoBehaviour
     int randInt;
 
     int randPosInt;
+
+    float moveSpeed;
 
     int stage;
 
@@ -51,6 +55,7 @@ public class Singing : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        UI.SetActive(false);
         noteSpawnY = 0;
         pitchLevel.transform.position = PitchSpawn.position;
         scoreText.text = "";
@@ -64,10 +69,14 @@ public class Singing : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        StartCoroutine(CutScene());
         stageChanger();
         lvlChanger();
 
-        if(Input.GetKey(KeyCode.P))
+        randInt = Random.Range(0, 3);
+        randPosInt = Random.Range(0, 2);
+
+        if (Input.GetKey(KeyCode.P))
         {
             game = true;
         }
@@ -78,8 +87,8 @@ public class Singing : MonoBehaviour
             TimerCountDown();
             gameOver();
         }
-        randInt = Random.Range(0, 3);
-        randPosInt = Random.Range(0, 2);
+
+        else { UI.SetActive(false);}
 
     }
 
@@ -87,10 +96,10 @@ public class Singing : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Mouse0))
         {
-            pitchLevel.transform.position = new Vector2(pitchLevel.transform.position.x, pitchLevel.transform.position.y + 0.03f);
+            pitchLevel.transform.position = new Vector2(pitchLevel.transform.position.x, pitchLevel.transform.position.y + (moveSpeed * 1.5f));
         }
 
-        pitchLevel.transform.position = new Vector2(pitchLevel.transform.position.x, pitchLevel.transform.position.y - 0.01f);
+        pitchLevel.transform.position = new Vector2(pitchLevel.transform.position.x, pitchLevel.transform.position.y - moveSpeed / 2);
     }
 
     void stageChanger()
@@ -100,6 +109,7 @@ public class Singing : MonoBehaviour
             noteSize = 0;
             movespeed = 2f;
             spawnTime = 0.25f;
+            moveSpeed = 0.1f;
         }
 
         if(stage == 2)
@@ -107,6 +117,7 @@ public class Singing : MonoBehaviour
             noteSize = 0;
             movespeed = 4f;
             spawnTime = 0.125f;
+            moveSpeed = 0.15f;
         }
 
         if(stage == 3)
@@ -114,6 +125,7 @@ public class Singing : MonoBehaviour
             noteSize = 1;
             movespeed = 6f;
             spawnTime = 0.095f;
+            moveSpeed = 0.2f;
         }
 
         if(stage == 4)
@@ -121,6 +133,7 @@ public class Singing : MonoBehaviour
             noteSize = 2;
             movespeed = 8f;
             spawnTime = 0.0625f;
+            moveSpeed = 0.25f;
         }
     }
 
@@ -176,6 +189,7 @@ public class Singing : MonoBehaviour
             finalScore = NotesBehavior.score / 10;
 
             HUD.finalSingingScore = finalScore;
+            HUD.scoreDisplay += finalScore;
         }
     }
 
@@ -207,5 +221,12 @@ public class Singing : MonoBehaviour
                 noteSpawnY += 2f;
             }
         }
+    }
+
+    IEnumerator CutScene()
+    {
+        yield return new WaitForSeconds(10);
+        UI.SetActive(true);
+        game = true;
     }
 }
