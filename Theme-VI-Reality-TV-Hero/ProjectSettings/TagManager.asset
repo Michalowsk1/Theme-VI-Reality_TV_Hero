@@ -11,6 +11,10 @@ TagManager:
   - Zero
   - ZeroNish
   - Note
+  - Fan
+  - box
+  - Tomato
+  - Cursor
   layers:
   - Default
   - TransparentFX
