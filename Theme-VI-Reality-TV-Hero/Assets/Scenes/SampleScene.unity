@@ -8029,6 +8029,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   beers: {fileID: 1123040137}
   trail: {fileID: 979053468}
+  collision: {fileID: 1123040141}
 --- !u!212 &1123040140
 SpriteRenderer:
   m_ObjectHideFlags: 0

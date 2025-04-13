@@ -171,7 +171,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8b99aee014bb69429879f9fb8184f65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audience:
-  - {fileID: 7658718628484889520, guid: ba4d8510297fbef44bd2d54957e07df1, type: 3}
-  - {fileID: 1318655604695103639, guid: b1b2b6086c23df2418b02241c0fa58ce, type: 3}
-  - {fileID: 16846810803902344, guid: f2b456bcec7dfd94cac5daa2f8e9c734, type: 3}
+  smoke: {fileID: 8890724908128234696, guid: 667c1514d059c524ba1af9b0e9f290d0, type: 3}

@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class Lootrop : MonoBehaviour
 {
-    [SerializeField] GameObject[] audience;
+    [SerializeField] GameObject smoke;
 
-    int randSpawn;
+    GameObject smokeClone;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -16,7 +17,6 @@ public class Lootrop : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        randSpawn = Random.Range(0, 3);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -26,7 +26,8 @@ public class Lootrop : MonoBehaviour
             if (cursorScript.slash)
             {
                 Destroy(gameObject);
-                Instantiate(audience[randSpawn], gameObject.transform.position, Quaternion.identity);
+                smokeClone = Instantiate(smoke, gameObject.transform.position, Quaternion.identity);
+                Destroy(smokeClone, 1);
             }
         }
     }

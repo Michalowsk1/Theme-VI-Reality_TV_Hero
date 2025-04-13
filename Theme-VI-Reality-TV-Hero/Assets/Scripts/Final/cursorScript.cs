@@ -13,13 +13,16 @@ public class cursorScript : MonoBehaviour
 
     public static bool click;
 
-    float clickTime;
+    float slashTime;
+
+    [SerializeField] Collider2D collision;
 
     void Start()
     {
-        clickTime = 0;
+        slashTime = 0;
         slash = false;
         click = false;
+        collision.enabled = false;
     }
     void Update()
     {
@@ -32,28 +35,34 @@ public class cursorScript : MonoBehaviour
 
     void clickingSystem()
     {
-        if (Input.GetKey(KeyCode.Mouse0))
+
+        if(Input.GetKey(KeyCode.Mouse0))
         {
-            clickTime += Time.deltaTime;
+            slashTime += Time.deltaTime;
+
+            if (slashTime >= 0.25f)
+            {
+                slash = true;
+                click = false;
+                collision.enabled = true;
+            }
+        }
+
+        else if(Input.GetKey(KeyCode.Mouse1))
+        {
+            slash = false;
+            click = true;
+            collision.enabled = true;
         }
         else
         {
-            clickTime = 0;
             click = false;
             slash = false;
+            collision.enabled = false;
+            slashTime = 0;
         }
 
-        if(clickTime < 0.5f && clickTime > 0.0f)
-        {
-            click = true;
-            slash = false;
-        }
-
-        else if (clickTime >= 0.5f)
-        {
-            click = false;
-            slash = true;
-        }
+        Debug.Log(slash + " " + click + "   " + slashTime);
     }
 }
 
