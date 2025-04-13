@@ -14,7 +14,7 @@ public class HUD : MonoBehaviour
 
     string hour, minute;
 
-    int fameLvl;
+    public static int fameLvl;
 
     public static int score;
 

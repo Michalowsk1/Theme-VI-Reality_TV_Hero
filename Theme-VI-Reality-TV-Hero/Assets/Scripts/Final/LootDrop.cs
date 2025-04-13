@@ -30,5 +30,11 @@ public class Lootrop : MonoBehaviour
                 Destroy(smokeClone, 1);
             }
         }
+
+        if(collision.gameObject.tag == "Finish")
+        {
+            Destroy (gameObject);
+            FinalLvl.maxPoints--;
+        }
     }
 }

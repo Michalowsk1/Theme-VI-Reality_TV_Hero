@@ -61,8 +61,6 @@ public class cursorScript : MonoBehaviour
             collision.enabled = false;
             slashTime = 0;
         }
-
-        Debug.Log(slash + " " + click + "   " + slashTime);
     }
 }
 

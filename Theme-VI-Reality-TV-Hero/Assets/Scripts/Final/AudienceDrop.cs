@@ -9,7 +9,6 @@ public class AudienceDrop : MonoBehaviour
     int randomInt;
     float timeSinceDestroy;
 
-
     void Start()
     {
         timeSinceDestroy = 0;

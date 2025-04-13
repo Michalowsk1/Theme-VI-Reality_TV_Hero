@@ -8,26 +8,47 @@ public class FinalLvl : MonoBehaviour
     [SerializeField] GameObject timeline;
     [SerializeField] GameObject background;
 
+    [SerializeField] GameObject gameMode;
+    [SerializeField] GameObject savedSome;
+    [SerializeField] GameObject savedAll;
+    [SerializeField] GameObject savedNone;
+    [SerializeField] GameObject mainMenu;
+
     [SerializeField] GameObject scoreText;
     [SerializeField] TextMeshPro scorePoints;
 
     public static bool game;
 
     public static int points;
+
+    public static int maxPoints;
+
+    public static bool gameOver;
+
+    bool gameEnd;
     // Start is called before the first frame update
     void Start()
     {
-        //timeline.SetActive(true);
+
+        gameOver = false;
+        timeline.SetActive(true);
         background.SetActive(false);
-        //game = false;
-        game = true;
+        game = false;
         scorePoints.text = "";
         scoreText.SetActive(false);
+
+        maxPoints = 15;
+
+        savedSome.SetActive(false);
+        savedAll.SetActive(false);
+        savedNone.SetActive(false);
+        mainMenu.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
+
         StartCoroutine(IntroScene());
 
         if(game)
@@ -37,7 +58,9 @@ public class FinalLvl : MonoBehaviour
             
         }
 
-        scorePoints.text = "Score: " + points + "/15";
+        scorePoints.text = "Score: " + points + "/" + maxPoints;
+
+        GameEnd();
     }
 
     IEnumerator IntroScene()
@@ -48,10 +71,36 @@ public class FinalLvl : MonoBehaviour
 
     void GameEnd()
     {
-        if(points == 15)
+        if (points == maxPoints)
         {
-            Debug.Log("GAMEWON");
-        }
-    }
+            gameOver = true;
+            timeline.SetActive(false);
+            if (points == 15)
+            {
+                savedAll.SetActive(true);
+                gameMode.SetActive(false);
+            }
 
+            else if (points > 1 && points < 15)
+            {
+                savedSome.SetActive(true);
+                gameMode.SetActive(false);
+            }
+
+            else if (points == 1)
+            {
+                savedSome.SetActive(true);
+                gameMode.SetActive(false);
+            }
+
+            else if (points == 0)
+            {
+                savedNone.SetActive(true);
+                gameMode.SetActive(false);
+            }
+
+
+        }
+
+    }
 }

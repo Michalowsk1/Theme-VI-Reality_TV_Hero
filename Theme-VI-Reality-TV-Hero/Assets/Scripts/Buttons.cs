@@ -41,8 +41,20 @@ public class Buttons : MonoBehaviour
 
     public void playFinalLvl()
     {
-        mainMenu.SetActive(false);
+        if (HUD.fameLvl >= 3)
+        {
+            mainMenu.SetActive(false);
+            FinalGame.SetActive(true);
+        }
+        else { }
+    }
+
+    public void PlayAgain()
+    {
+        FinalGame.SetActive(false);
         FinalGame.SetActive(true);
+        FinalLvl.points = 0;
+        FinalLvl.maxPoints = 15;
     }
 
 }

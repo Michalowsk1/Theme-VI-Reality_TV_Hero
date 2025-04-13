@@ -30,11 +30,12 @@ public class FinalSpawner : MonoBehaviour
             randSpawnInt = Random.Range(0, 3);
             randBoxInt = Random.Range(0, 3);
 
-            if(floatTimer >= 2)
+            if(floatTimer >= 2f)
             {
                 Instantiate(box, boxSpawner[randSpawnInt].position, Quaternion.identity);
                 floatTimer = 0;
             }
         }
+
     }
 }

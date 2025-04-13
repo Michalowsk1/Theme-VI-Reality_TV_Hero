@@ -19,5 +19,11 @@ public class scorePoints : MonoBehaviour
                 FinalLvl.points++;
             }
         }
+
+        if(collision.gameObject.tag == "Finish")
+        {
+            Destroy(gameObject);
+            FinalLvl.maxPoints--;
+        }
     }
 }
